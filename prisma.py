@@ -2,6 +2,7 @@ import os
 import time
 import subprocess
 from logs_manager import registrar_log
+from recon_scanner import escanear_alvo
 
 def check_identity():
     result = subprocess.getoutput("proxychains4 curl -s https://check.torproject.org/api/ip")
@@ -39,7 +40,8 @@ def menu_prisma():
         print("3. Testar Conexão Externa (Curl)")
         print("4. Chamar Net Guard (Lunes)")
         print("5. Ver Logs de Auditoria")
-        print("6. Sair")
+        print("6. Iniciar Reconhecimento (Auditoria)")
+        print("7. Sair")
         
         escolha = input("\nPrisma > ")
         
@@ -64,6 +66,10 @@ def menu_prisma():
             else:
                 print("\n[X] Nenhum log encontrado.")
         elif escolha == "6":
+            target = input("Digite o domínio alvo de teste (ex: testsite.com): ")
+            escanear_alvo(target)
+            print("\n[v] Auditoria finalizada. Verifique os logs.")
+        elif escolha == "7":
             registrar_log("Sessão encerrada", "INFO")
             break
 
