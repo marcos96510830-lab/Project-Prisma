@@ -1,55 +1,25 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 import os
-import time
-import logging
+import datetime
 
-# Configuração do sistema de logs
-LOG_FILE = 'prisma_audit.log'
-logging.basicConfig(
-    filename=LOG_FILE,
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-
-class SecurityAlert:
-    def __init__(self):
-        self.max_attempts = 3
-
-    def check_integrity(self):
-        """
-        Verifica a integridade do ambiente e o status do túnel anônimo.
-        """
-        print("[*] Iniciando verificação de integridade do Project Prisma...")
-        logging.info("Verificação de integridade iniciada.")
+def registrar_evento(mensagem):
+    # Obtém o diretório home do usuário atual
+    home_dir = os.path.expanduser("~")
+    log_dir = os.path.join(home_dir, "Project-Prisma")
+    
+    # Cria o diretório Project-Prisma se não existir
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
         
-        if os.path.exists('.git'):
-            print("[+] Diretório Git protegido.")
-            logging.info("Integridade do repositório confirmada.")
-        else:
-            print("[-] Atenção: Diretório de controle de versão não encontrado.")
-            logging.warning("Verificação de repositório falhou.")
+    log_file = os.path.join(log_dir, "seguranca.log")
+    
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    log_linha = f"[{timestamp}] ALERTA DE SEGURANÇA: {mensagem}\n"
+    
+    with open(log_file, "a") as f:
+        f.write(log_linha)
+    
+    print(f"Registro salvo em: {log_file}")
 
-    def monitor_ssh_port(self):
-        """
-        Verifica o status do serviço SSH local.
-        """
-        print("[*] Monitorando serviço SSH...")
-        # Simulação de verificação de portas e acesso
-        logging.info("Verificação de segurança da porta SSH executada.")
-        print("[+] Monitoramento ativo. Tentativas de login serão registradas em prisma_audit.log.")
-
-    def generate_alert(self, event_type, message):
-        """
-        Gera alertas críticos e regista no ficheiro de auditoria.
-        """
-        alert_message = f"ALERTA [{event_type.upper()}]: {message}"
-        print(f"[!] {alert_message}")
-        logging.critical(alert_message)
-
-if __name__ == "__main__":
-    monitor = SecurityAlert()
-    monitor.check_integrity()
-    monitor.monitor_ssh_port()
+# Registrando a operação confirmada
+registrar_evento("Extração de dados concluída utilizando a chave: deuteronomio")
 
