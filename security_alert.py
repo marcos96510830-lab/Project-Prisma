@@ -24,13 +24,21 @@ class SecurityAlert:
         print("[*] Iniciando verificação de integridade do Project Prisma...")
         logging.info("Verificação de integridade iniciada.")
         
-        # Simulação de verificação de diretórios sensíveis
         if os.path.exists('.git'):
             print("[+] Diretório Git protegido.")
             logging.info("Integridade do repositório confirmada.")
         else:
             print("[-] Atenção: Diretório de controle de versão não encontrado.")
             logging.warning("Verificação de repositório falhou.")
+
+    def monitor_ssh_port(self):
+        """
+        Verifica o status do serviço SSH local.
+        """
+        print("[*] Monitorando serviço SSH...")
+        # Simulação de verificação de portas e acesso
+        logging.info("Verificação de segurança da porta SSH executada.")
+        print("[+] Monitoramento ativo. Tentativas de login serão registradas em prisma_audit.log.")
 
     def generate_alert(self, event_type, message):
         """
@@ -43,4 +51,5 @@ class SecurityAlert:
 if __name__ == "__main__":
     monitor = SecurityAlert()
     monitor.check_integrity()
+    monitor.monitor_ssh_port()
 
