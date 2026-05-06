@@ -1,22 +1,19 @@
 # Project Prisma 🛡️
 
-Framework de segurança ofensiva, auditoria de superfície de ataque e proteção de identidade desenvolvido para utilização em ambientes restritos via linha de comando (CLI).
+O Project Prisma é uma arquitetura de segurança, auditoria e ethical hacking projetada para ambientes móveis (Termux) e infraestruturas conectadas.
 
-## Módulos Principais
+## Módulos do Projeto
 
-* **prisma.py:** Módulo principal de encriptação, roteamento e gestão de identidade.
-* **recon_scanner.py:** Ferramenta de mapeamento de rede e auditoria de portas.
-* **lunes_net_guard.py:** Monitoramento de sockets e proteção de tráfego (*Network Guard*).
-* **logs_manager.py:** Gestão e encriptação de relatórios e logs de auditoria.
+* **src/prisma_check.py**: Raio-x do sistema, verificação de espaço em disco e integridade dos arquivos de log.
+* **src/security_alert.py**: Sistema de auditoria e notificação de eventos críticos e extração de dados.
+* **src/recuperar_senha.py**: Ferramenta de recuperação automatizada de chaves GPG.
+* **src/lunes_etica.py**: Engine de diretrizes éticas que delimita a atuação do módulo Lunes.
 
-## Estrutura de Pastas
+## Configuração e Instalação
 
-```text
-Project-Prisma/
-├── docs/
-│   └── AUDIT_REPORT.md
-├── logs_manager.py
-├── lunes_net_guard.py
-├── prisma.py
-└── recon_scanner.py
+Clone o repositório e instale os diretórios de log:
+```bash
+git clone [https://github.com/marcos96510830/Project-Prisma.git](https://github.com/marcos96510830/Project-Prisma.git)
+cd Project-Prisma
+python3 src/prisma_check.py
 
